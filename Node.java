@@ -8,12 +8,15 @@ public class Node {
 	}
 	public void setLeftNode(Node leftNode) {
 		this.leftNode = leftNode;
+		if (leftNode != null) leftNode.setDadNode(this);
 	}
 	public Node getRightNode() {
 		return rightNode;
 	}
 	public void setRightNode(Node rightNode) {
 		this.rightNode = rightNode;
+		if (rightNode != null)
+			rightNode.setDadNode(this);
 	}
 	public int getData() {
 		return data;
