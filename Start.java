@@ -11,25 +11,28 @@ public class Start {
 		= new BinaryTree(raiz);
 		
 		raiz.setLeftNode(dois);
-		arvoreExemplo.delete(raiz);
 		
 		System.out.println("Root " + arvoreExemplo.getRoot());  
-		dois.setRightNode(tres);
+		raiz.setRightNode(tres);
 		tres.setLeftNode(quatro);
 		System.out.println(arvoreExemplo.isStrictBinaryTree());
-		arvoreExemplo.printPreOrder();
+			
+		Node sete = new Node(7);
+		dois.setRightNode(sete);
+		Node dez = new Node(10);
+		sete.setRightNode(dez);
+		dois.setLeftNode(new Node(11));
+				
+		Node cinco = new Node(5);
+		tres.setRightNode(cinco);
+		Node oito = new Node(8);
+		cinco.setRightNode(oito);
 		
-		System.out.println("Profundidade de 2: " + arvoreExemplo.depth(dois));
-		System.out.println("Profundidade de 3: " + arvoreExemplo.depth(tres));
-		System.out.println("Profundidade de 4: " + arvoreExemplo.depth(quatro));
 		
-		/*
-		 
-		
-		
-		tres.setRightNode(new Node(5));
-		
-		quatro.setRightNode(new Node(6));
+		Node seis = new Node(6);
+		quatro.setRightNode(seis);
+		seis.setLeftNode(new Node(9));
+		quatro.setLeftNode(new Node(12));
 		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
 		
 		arvoreExemplo.printPreOrder();
@@ -46,9 +49,12 @@ public class Start {
 		System.out.println(arvoreExemplo.search(1));
 		arvoreExemplo.delete(raiz);
 		
-		arvoreExemplo.delete(dois);
-		arvoreExemplo.delete(quatro);
-	*/
+		System.out.println("Altura da árvore: " + arvoreExemplo.getHeight());
 		
+		System.out.println("Altura da subárvore 2: " + arvoreExemplo.getHeight(dois));
+		System.out.println("Altura da subárvore 3: " + arvoreExemplo.getHeight(tres));
+
+		System.out.println("Arvore é balanceada?");
+		System.out.println(arvoreExemplo.isBalanced());
 	}
 }
