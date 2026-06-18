@@ -117,9 +117,9 @@ public class BinaryTree {
 				);
 		//se tem dois filhos
 		if ((nodeToDelete.getLeftNode()!= null) && (nodeToDelete.getRightNode()!= null )) {
-			System.out.println("Nessa vers„o - N„o È possÌvel apagar nÛs com 2 filhos");
+			System.out.println("Nessa vers√£o - N√£o √© poss√≠vel apagar n√≥s com 2 filhos");
 		}
-		//se sÛ tem um filho
+		//se s√≥ tem um filho
 		if (getSize(nodeToDelete) == 2) {
 			//pai tem que ligar no filho dele na perna certa
 			Node child;
@@ -129,7 +129,7 @@ public class BinaryTree {
 				child = nodeToDelete.getRightNode();
 			
 			//se tiver tentando apagar a raiz
-			//o filho ser· a nova raiz e sai do mÈtodo
+			//o filho ser√° a nova raiz e sai do m√©todo
 			if (nodeToDelete == root) {
 				child.dadNode = null;
 				root = child;
@@ -145,11 +145,11 @@ public class BinaryTree {
 		}
 			
 		
-		//se n„o tem filho
+		//se n√£o tem filho
 		if (nodeToDelete.isExternal()) {
 			//achar o pai dele 
 			
-			//ver se ele È nÛ esquerdo ou direito
+			//ver se ele √© n√≥ esquerdo ou direito
 			if (nodeToDelete.getDadNode().getLeftNode()==nodeToDelete)	
 				nodeToDelete.getDadNode().setLeftNode(null);
 			else
@@ -184,7 +184,7 @@ public class BinaryTree {
 			}
 	}		
 	
-	//- verificar se È estritamente bin·ria (se tem 0 ou dois filhos funÁ„o recursiva 
+	//- verificar se √© estritamente bin√°ria (se tem 0 ou dois filhos fun√ß√£o recursiva 
 	public boolean isStrictBinaryTree() {
 		return isStrictBinaryTree(root);
 	}
@@ -216,16 +216,29 @@ public class BinaryTree {
 		  return 1 + depth(x.dadNode);
 	}
 	
-	//altura total da arvore - n„o recursivo
-	public static int treeHeight() {
-	     int h = 0;
-	     //percorrer toda ·rvore e achar a maior profundidade
-	     
-	      Node v;
-	    	 if (v.isExternal())
-	    	   h = Math.max(h, depth(v));
-	     return h;
-	   }
+	public int getHeight () {
+		return getHeight(root); 
+	}
+	//encontra altura da √°rvore
+	//Se v √© um no externo, ent√£o a altura de v  √© 0.
+	//Caso contr√°rio, a altura de v √© um mais a altura m√°xima dos filhos de v.
+	//A altura total de uma √°rvore T √© definida como a altura da raiz de T.
 
 	
+	public int getHeight (Node aux) {
+	    if (aux == null) {
+	        return -1;
+	    } else 
+	    	return Math.max(getHeight(aux.getLeftNode()), 
+	    			getHeight(aux.getRightNode()))+1;  
+	}
+
+	public boolean isBalanced() {
+		return isBalanced(root);
+	}
+	
+	public boolean isBalanced(Node aux) {
+		return false;
+	}
+
 }
