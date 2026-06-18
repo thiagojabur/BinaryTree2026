@@ -9,19 +9,25 @@ public class Start {
 		Node quatro = new Node(4);
 		BinaryTree arvoreExemplo 
 		= new BinaryTree(raiz);
-		System.out.println("Criou a arvore com:  " + arvoreExemplo.getSize() + " elemento");
 		
 		raiz.setLeftNode(dois);
-		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
+		arvoreExemplo.delete(raiz);
 		
-		raiz.setRightNode(tres);
-		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
-		
+		System.out.println("Root " + arvoreExemplo.getRoot());  
+		dois.setRightNode(tres);
 		tres.setLeftNode(quatro);
-		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
+		System.out.println(arvoreExemplo.isStrictBinaryTree());
+		arvoreExemplo.printPreOrder();
+		
+		System.out.println("Profundidade de 2: " + arvoreExemplo.depth(dois));
+		System.out.println("Profundidade de 3: " + arvoreExemplo.depth(tres));
+		System.out.println("Profundidade de 4: " + arvoreExemplo.depth(quatro));
+		
+		/*
+		 
+		
 		
 		tres.setRightNode(new Node(5));
-		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
 		
 		quatro.setRightNode(new Node(6));
 		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
@@ -38,7 +44,11 @@ public class Start {
 		arvoreExemplo.listInternalNodes();
 		
 		System.out.println(arvoreExemplo.search(1));
+		arvoreExemplo.delete(raiz);
+		
 		arvoreExemplo.delete(dois);
-		arvoreExemplo.printPreOrder();
+		arvoreExemplo.delete(quatro);
+	*/
+		
 	}
 }

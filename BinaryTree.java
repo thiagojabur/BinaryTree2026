@@ -1,3 +1,5 @@
+import java.util.*; //para usar lista de itens
+
 public class BinaryTree {
 	Node root;
 	
@@ -7,16 +9,16 @@ public class BinaryTree {
 	}
 	
 	public int getSize() {
-		return getSize(root, 0)-1;
+		return getSize(root);
 	}
 	
-	public int getSize(Node x, int sizeAux) {
+	public int getSize(Node x) {
 		//faz a varredura e retorna a quantidade
 		if (x == null) 
-			return 1;
+			return 0;
 			
-		return (getSize(x.getLeftNode(), sizeAux)
-				+ getSize(x.getRightNode(), sizeAux)); 
+		return 1 + getSize(x.getLeftNode())
+				+ getSize(x.getRightNode()); 
 			
 	}
 	
@@ -109,6 +111,41 @@ public class BinaryTree {
 	}
 	
 	public void delete(Node nodeToDelete) {
+		System.out.println("Tentando apagar " + nodeToDelete.getData() + " " +
+				nodeToDelete.getLeftNode() + " " +
+				nodeToDelete.getRightNode()
+				);
+		//se tem dois filhos
+		if ((nodeToDelete.getLeftNode()!= null) && (nodeToDelete.getRightNode()!= null )) {
+			System.out.println("Nessa versão - Não é possível apagar nós com 2 filhos");
+		}
+		//se só tem um filho
+		if (getSize(nodeToDelete) == 2) {
+			//pai tem que ligar no filho dele na perna certa
+			Node child;
+			if (nodeToDelete.getLeftNode() != null)
+				child = nodeToDelete.getLeftNode();
+			else
+				child = nodeToDelete.getRightNode();
+			
+			//se tiver tentando apagar a raiz
+			//o filho será a nova raiz e sai do método
+			if (nodeToDelete == root) {
+				child.dadNode = null;
+				root = child;
+				return;
+			}
+			
+			if (nodeToDelete.dadNode.getLeftNode() == nodeToDelete)
+				nodeToDelete.dadNode.setLeftNode(child);
+			else
+				nodeToDelete.dadNode.setRightNode(child);
+			
+			child.setDadNode(nodeToDelete.dadNode);	
+		}
+			
+		
+		//se não tem filho
 		if (nodeToDelete.isExternal()) {
 			//achar o pai dele 
 			
@@ -116,16 +153,13 @@ public class BinaryTree {
 			if (nodeToDelete.getDadNode().getLeftNode()==nodeToDelete)	
 				nodeToDelete.getDadNode().setLeftNode(null);
 			else
-				nodeToDelete.getDadNode().setRightNode(null);
-			
+				nodeToDelete.getDadNode().setRightNode(null);	
 		}
 	}
 	
-	public boolean search(int valueToSearch) {
-		
+	public boolean search(int valueToSearch) {	
 		return search(valueToSearch, root, false);
 	}
-	
 	
 
 	public boolean search(int valueToSearch, Node auxNode, boolean flag) {
@@ -147,6 +181,51 @@ public class BinaryTree {
 								||
 				         search(valueToSearch, auxNode.getRightNode(), flag)
 				         );
-			}	
+			}
+	}		
+	
+	//- verificar se é estritamente binária (se tem 0 ou dois filhos função recursiva 
+	public boolean isStrictBinaryTree() {
+		return isStrictBinaryTree(root);
 	}
+	public boolean isStrictBinaryTree(Node x) {
+		if (x.getLeftNode()!= null && x.getRightNode()!= null)
+			return true;
+		
+		if (x.getLeftNode()== null && x.getRightNode()== null)
+			return true;
+		
+		if (x.getLeftNode()== null && x.getRightNode()!= null)
+			return false;
+		
+		if (x.getLeftNode()!= null && x.getRightNode()== null)
+			return false;
+		
+		return (isStrictBinaryTree(x.getLeftNode())
+				&& isStrictBinaryTree(x.getRightNode()));
+	}
+	public int getRoot() {
+		return root.data;
+	}
+	
+	public int depth (Node x) {
+		  // calculo da profundidade do no x
+		  if(x == root) 
+		    return 0;
+		  
+		  return 1 + depth(x.dadNode);
+	}
+	
+	//altura total da arvore - não recursivo
+	public static int treeHeight() {
+	     int h = 0;
+	     //percorrer toda árvore e achar a maior profundidade
+	     
+	      Node v;
+	    	 if (v.isExternal())
+	    	   h = Math.max(h, depth(v));
+	     return h;
+	   }
+
+	
 }
