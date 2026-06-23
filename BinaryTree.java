@@ -12,13 +12,12 @@ public class BinaryTree {
 	}
 	
 	public int getSize(Node x) {
-		//faz a varredura e retorna a quantidade
+		//faz a varredura e retorna a quantidade de nÛs
 		if (x == null) 
 			return 0;
 			
 		return 1 + getSize(x.getLeftNode())
-				+ getSize(x.getRightNode()); 
-			
+				+ getSize(x.getRightNode()); 			
 	}
 	
 	public void printPosOrder() {
@@ -113,9 +112,9 @@ public class BinaryTree {
 		
 		//se tem dois filhos
 		if ((nodeToDelete.getLeftNode()!= null) && (nodeToDelete.getRightNode()!= null )) {
-			System.out.println("Nessa vers√£o - N√£o √© poss√≠vel apagar n√≥s com 2 filhos");
+			System.out.println("Nessa vers„o - N„o È possÌvel apagar nÛs com 2 filhos");
 		}
-		//se s√≥ tem um filho
+		//se sÛ tem um filho
 		if (getSize(nodeToDelete) == 2) {
 			//pai tem que ligar no filho dele na perna certa
 			Node child;
@@ -125,7 +124,7 @@ public class BinaryTree {
 				child = nodeToDelete.getRightNode();
 			
 			//se tiver tentando apagar a raiz
-			//o filho ser√° a nova raiz e sai do m√©todo
+			//o filho ser· a nova raiz e sai do mÈtodo
 			if (nodeToDelete == root) {
 				child.dadNode = null;
 				root = child;
@@ -146,11 +145,11 @@ public class BinaryTree {
 		    return;
 		}
 		
-		//se n√£o tem filho
+		//se n„o tem filho
 		if (nodeToDelete.isExternal()) {
 			//achar o pai dele 
 			
-			//ver se ele √© n√≥ esquerdo ou direito
+			//ver se ele È nÛ esquerdo ou direito
 			if (nodeToDelete.getDadNode().getLeftNode()==nodeToDelete)	
 				nodeToDelete.getDadNode().setLeftNode(null);
 			else
@@ -185,7 +184,7 @@ public class BinaryTree {
 			}
 	}		
 	
-	//- verificar se √© estritamente bin√°ria (se tem 0 ou dois filhos fun√ß√£o recursiva 
+	//- verificar se È estritamente bin·ria (se tem 0 ou dois filhos funÁ„o recursiva 
 	public boolean isStrictBinaryTree() {
 		return isStrictBinaryTree(root);
 	}
@@ -216,10 +215,10 @@ public class BinaryTree {
 	public int getHeight () {
 		return getHeight(root); 
 	}
-	//encontra altura da √°rvore
-	//Se v √© um no externo, ent√£o a altura de v  √© 0.
-	//Caso contr√°rio, a altura de v √© um mais a altura m√°xima dos filhos de v.
-	//A altura total de uma √°rvore T √© definida como a altura da raiz de T.
+	//encontra altura da ·rvore
+	//Se v È um no externo, ent„o a altura de v  È 0.
+	//Caso contr·rio, a altura de v È um mais a altura m·xima dos filhos de v.
+	//A altura total de uma ·rvore T È definida como a altura da raiz de T.
 
 	
 	public int getHeight (Node aux) {
@@ -230,11 +229,29 @@ public class BinaryTree {
 	    			getHeight(aux.getRightNode()))+1;  
 	}
 
+	public boolean isPerfectBalanced() {
+		return isPerfectBalanced(root);
+	}
+	
+	public boolean isPerfectBalanced(Node v) {
+		//CondiÁ„o de parada
+		if (v == null) 
+			return true;
+		
+		int bf = getSize(v.getLeftNode()) - getSize(v.getRightNode());
+		
+		return (Math.abs(bf)) <= 1 
+				&& isPerfectBalanced(v.getLeftNode()) 
+				&& isPerfectBalanced(v.getRightNode());
+	
+	}
+	
+	
 	public boolean isBalanced() {
 		return isBalanced(root);
 	}
 	
-	private boolean isBalanced(Node v) {
+	public boolean isBalanced(Node v) {
 		if (v == null) 
 			return true;
 		
