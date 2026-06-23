@@ -110,15 +110,12 @@ public class BinaryTree {
 	}
 	
 	public void delete(Node nodeToDelete) {
-		System.out.println("Tentando apagar " + nodeToDelete.getData() + " " +
-				nodeToDelete.getLeftNode() + " " +
-				nodeToDelete.getRightNode()
-				);
+		
 		//se tem dois filhos
 		if ((nodeToDelete.getLeftNode()!= null) && (nodeToDelete.getRightNode()!= null )) {
-			System.out.println("Nessa versão - Não é possível apagar nós com 2 filhos");
+			System.out.println("Nessa versÃ£o - NÃ£o Ã© possÃ­vel apagar nÃ³s com 2 filhos");
 		}
-		//se só tem um filho
+		//se sÃ³ tem um filho
 		if (getSize(nodeToDelete) == 2) {
 			//pai tem que ligar no filho dele na perna certa
 			Node child;
@@ -128,7 +125,7 @@ public class BinaryTree {
 				child = nodeToDelete.getRightNode();
 			
 			//se tiver tentando apagar a raiz
-			//o filho será a nova raiz e sai do método
+			//o filho serÃ¡ a nova raiz e sai do mÃ©todo
 			if (nodeToDelete == root) {
 				child.dadNode = null;
 				root = child;
@@ -144,11 +141,16 @@ public class BinaryTree {
 		}
 			
 		
-		//se não tem filho
+		if(nodeToDelete == root && root.isExternal()) {
+		    root = null;
+		    return;
+		}
+		
+		//se nÃ£o tem filho
 		if (nodeToDelete.isExternal()) {
 			//achar o pai dele 
 			
-			//ver se ele é nó esquerdo ou direito
+			//ver se ele Ã© nÃ³ esquerdo ou direito
 			if (nodeToDelete.getDadNode().getLeftNode()==nodeToDelete)	
 				nodeToDelete.getDadNode().setLeftNode(null);
 			else
@@ -183,28 +185,24 @@ public class BinaryTree {
 			}
 	}		
 	
-	//- verificar se é estritamente binária (se tem 0 ou dois filhos função recursiva 
+	//- verificar se Ã© estritamente binÃ¡ria (se tem 0 ou dois filhos funÃ§Ã£o recursiva 
 	public boolean isStrictBinaryTree() {
 		return isStrictBinaryTree(root);
 	}
 	public boolean isStrictBinaryTree(Node x) {
-		if (x.getLeftNode()!= null && x.getRightNode()!= null)
-			return true;
-		
-		if (x.getLeftNode()== null && x.getRightNode()== null)
-			return true;
-		
-		if (x.getLeftNode()== null && x.getRightNode()!= null)
-			return false;
-		
-		if (x.getLeftNode()!= null && x.getRightNode()== null)
-			return false;
-		
-		return (isStrictBinaryTree(x.getLeftNode())
-				&& isStrictBinaryTree(x.getRightNode()));
+
+	    if (x == null)
+	        return true;
+
+	    if ((x.getLeftNode() == null && x.getRightNode() != null) ||
+	        (x.getLeftNode() != null && x.getRightNode() == null))
+	        return false;
+
+	    return isStrictBinaryTree(x.getLeftNode())
+	            && isStrictBinaryTree(x.getRightNode());
 	}
 	public int getRoot() {
-		return root.data;
+		return root == null ? null : root.getData();
 	}
 	
 	public int depth (Node x) {
@@ -218,10 +216,10 @@ public class BinaryTree {
 	public int getHeight () {
 		return getHeight(root); 
 	}
-	//encontra altura da árvore
-	//Se v é um no externo, então a altura de v  é 0.
-	//Caso contrário, a altura de v é um mais a altura máxima dos filhos de v.
-	//A altura total de uma árvore T é definida como a altura da raiz de T.
+	//encontra altura da Ã¡rvore
+	//Se v Ã© um no externo, entÃ£o a altura de v  Ã© 0.
+	//Caso contrÃ¡rio, a altura de v Ã© um mais a altura mÃ¡xima dos filhos de v.
+	//A altura total de uma Ã¡rvore T Ã© definida como a altura da raiz de T.
 
 	
 	public int getHeight (Node aux) {
@@ -246,21 +244,6 @@ public class BinaryTree {
 				&& isBalanced(v.getLeftNode()) 
 				&& isBalanced(v.getRightNode());
 	}
-	/*
-	public boolean isBalanced(Node aux) {
-		//condiçao de parada
-		if (aux == null) 
-			return true;
-				
-		//alturas de duas subárvores diferem de, no máximo em módulo, 1 
-		if (Math.abs(getHeight(aux.getLeftNode()) - getHeight(aux.getRightNode())) >1) 
-			return false;
-		
-		//chamar ela mesma
-		return (isBalanced(aux.getLeftNode()) 
-		&& isBalanced(aux.getRightNode()));
-		
-	}
-	*/
+	
 
 }
