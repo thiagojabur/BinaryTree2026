@@ -2,7 +2,7 @@
 public class Start {
 
 	public static void main(String[] args) {
-		System.out.println("¡rvore Bin·ria");
+		System.out.println("√Årvore Bin√°ria");
 		Node raiz = new Node(1);
 		Node dois = new Node(2);
 		Node tres = new Node(3);
@@ -10,51 +10,44 @@ public class Start {
 		BinaryTree arvoreExemplo 
 		= new BinaryTree(raiz);
 				
-		raiz.setLeftNode(dois);
+		raiz.setRightNode(dois);
 		
 		System.out.println("Root " + arvoreExemplo.getRoot());  
-		raiz.setRightNode(tres);
-		tres.setLeftNode(quatro);
-			
+		dois.setRightNode(tres);
+		dois.setLeftNode(new Node(20));
 		Node sete = new Node(7);
-		dois.setRightNode(sete);
-		Node dez = new Node(10);
-		dois.setLeftNode(dez);
-				
-		Node cinco = new Node(5);
-		tres.setRightNode(cinco);
-		
-		Node seis = new Node(6);
-		quatro.setRightNode(seis);
-		sete.setRightNode(new Node(9));
+		tres.setRightNode(sete);
+		sete.setLeftNode(quatro);
+
 		
 		System.out.println("A arvore com:  " + arvoreExemplo.getSize() + " elemento");
 		
-		System.out.println("… estritamente Bin·ria " + arvoreExemplo.isStrictBinaryTree());
+		System.out.println("√â estritamente Bin√°ria " + arvoreExemplo.isStrictBinaryTree());
 		
 		arvoreExemplo.printPreOrder();
 		arvoreExemplo.printPosOrder();
 		arvoreExemplo.printInOrder();
-		System.out.println("\nN˙mero de elementos: ");
+		System.out.println("\nN√∫mero de elementos: ");
 		System.out.println(arvoreExemplo.getSize());
 	
 		System.out.println("Folhas");
 		arvoreExemplo.listExternalNodes();
-		System.out.println("\nNÛs Internos");
+		System.out.println("\nN√≥s Internos");
 		arvoreExemplo.listInternalNodes();
 		
 		System.out.println(arvoreExemplo.search(1));
 			
-		System.out.println("Altura da ·rvore: " + arvoreExemplo.getHeight());
+		System.out.println("Altura da √°rvore: " + arvoreExemplo.getHeight());
 		
-		System.out.println("Altura da sub·rvore 2: " + arvoreExemplo.getHeight(dois));
-		System.out.println("Altura da sub·rvore 3: " + arvoreExemplo.getHeight(tres));
+		System.out.println("Altura da sub√°rvore 2: " + arvoreExemplo.getHeight(dois));
+		System.out.println("Altura da sub√°rvore 3: " + arvoreExemplo.getHeight(tres));
 
-		System.out.print("Arvore È balanceada? ");
+		System.out.print("Arvore √© balanceada? ");
 		System.out.println(arvoreExemplo.isBalanced());
 	    
-		System.out.print("Arvore È Perfeitamente balanceada? ");
+		System.out.print("Arvore √© Perfeitamente balanceada? ");
 		System.out.println(arvoreExemplo.isPerfectBalanced());
 
+		System.out.println("√â ABB?" + arvoreExemplo.isBinarySearchTree());
 	}
 }
