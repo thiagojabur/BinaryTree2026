@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class BinaryTree {
 	Node root;
-	
+	List<Integer> aux = new ArrayList<>();
 	
 	public BinaryTree(Node root) {
 		this.root = root;
@@ -12,7 +14,7 @@ public class BinaryTree {
 	}
 	
 	public int getSize(Node x) {
-		//faz a varredura e retorna a quantidade de nÛs
+		//faz a varredura e retorna a quantidade de n√≥s
 		if (x == null) 
 			return 0;
 			
@@ -36,7 +38,6 @@ public class BinaryTree {
 	}
 	
 	public void printInOrder() {
-		System.out.println("\nIn order");
 		printInOrder(root);
 	}
 	
@@ -48,10 +49,8 @@ public class BinaryTree {
 			
 			printInOrder(x.getLeftNode());
 			System.out.print(x.getData() + " ");
+			aux.add(x.getData());
 			printInOrder(x.getRightNode());
-			
-		
-	
 	}
 	
 	
@@ -112,9 +111,9 @@ public class BinaryTree {
 		
 		//se tem dois filhos
 		if ((nodeToDelete.getLeftNode()!= null) && (nodeToDelete.getRightNode()!= null )) {
-			System.out.println("Nessa vers„o - N„o È possÌvel apagar nÛs com 2 filhos");
+			System.out.println("Nessa vers√£o - N√£o √© poss√≠vel apagar n√≥s com 2 filhos");
 		}
-		//se sÛ tem um filho
+		//se s√≥ tem um filho
 		if (getSize(nodeToDelete) == 2) {
 			//pai tem que ligar no filho dele na perna certa
 			Node child;
@@ -124,7 +123,7 @@ public class BinaryTree {
 				child = nodeToDelete.getRightNode();
 			
 			//se tiver tentando apagar a raiz
-			//o filho ser· a nova raiz e sai do mÈtodo
+			//o filho ser√° a nova raiz e sai do m√©todo
 			if (nodeToDelete == root) {
 				child.dadNode = null;
 				root = child;
@@ -145,11 +144,11 @@ public class BinaryTree {
 		    return;
 		}
 		
-		//se n„o tem filho
+		//se n√£o tem filho
 		if (nodeToDelete.isExternal()) {
 			//achar o pai dele 
 			
-			//ver se ele È nÛ esquerdo ou direito
+			//ver se ele √© n√≥ esquerdo ou direito
 			if (nodeToDelete.getDadNode().getLeftNode()==nodeToDelete)	
 				nodeToDelete.getDadNode().setLeftNode(null);
 			else
@@ -184,7 +183,7 @@ public class BinaryTree {
 			}
 	}		
 	
-	//- verificar se È estritamente bin·ria (se tem 0 ou dois filhos funÁ„o recursiva 
+	//- verificar se √© estritamente bin√°ria (se tem 0 ou dois filhos fun√ß√£o recursiva 
 	public boolean isStrictBinaryTree() {
 		return isStrictBinaryTree(root);
 	}
@@ -215,10 +214,10 @@ public class BinaryTree {
 	public int getHeight () {
 		return getHeight(root); 
 	}
-	//encontra altura da ·rvore
-	//Se v È um no externo, ent„o a altura de v  È 0.
-	//Caso contr·rio, a altura de v È um mais a altura m·xima dos filhos de v.
-	//A altura total de uma ·rvore T È definida como a altura da raiz de T.
+	//encontra altura da √°rvore
+	//Se v √© um no externo, ent√£o a altura de v  √© 0.
+	//Caso contr√°rio, a altura de v √© um mais a altura m√°xima dos filhos de v.
+	//A altura total de uma √°rvore T √© definida como a altura da raiz de T.
 
 	
 	public int getHeight (Node aux) {
@@ -234,7 +233,7 @@ public class BinaryTree {
 	}
 	
 	public boolean isPerfectBalanced(Node v) {
-		//CondiÁ„o de parada
+		//Condi√ß√£o de parada
 		if (v == null) 
 			return true;
 		
@@ -246,6 +245,22 @@ public class BinaryTree {
 	
 	}
 	
+	public boolean isBinarySearchTree() {
+		 this.aux.clear();
+		 printInOrder();
+		 
+		 for (int i=0; i<this.aux.size()-1; i++) {
+			 if (aux.get(i) > aux.get(i+1)) {
+				 
+				 this.aux.clear();
+				 return false;
+			 }	 
+		 }
+		 this.aux.clear();
+		 return true;
+		
+	}
+
 	
 	public boolean isBalanced() {
 		return isBalanced(root);
